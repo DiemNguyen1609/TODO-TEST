@@ -2,15 +2,15 @@ package com.test.domain.usecases
 
 import com.test.domain.common.BaseFlowableUseCase
 import com.test.domain.common.FlowableRxTransformer
-import com.test.domain.entities.CallResult
+import com.test.domain.entities.BuyResult
 import com.test.domain.repositories.TodoRepository
 import io.reactivex.Flowable
 
-class CallUseCase(
-    transformer: FlowableRxTransformer<CallResult>,
+class BuyUseCase(
+    transformer: FlowableRxTransformer<BuyResult>,
     private val repositories: TodoRepository
-): BaseFlowableUseCase<CallResult>(transformer) {
-    override fun createFlowable(data: Map<String, Any>?): Flowable<CallResult> {
+): BaseFlowableUseCase<BuyResult>(transformer) {
+    override fun createFlowable(data: Map<String, Any>?): Flowable<BuyResult> {
         val map = mutableMapOf<String, String>()
         return if (data !== null) {
             data.forEach { map[it.key] = it.value.toString() }
@@ -19,7 +19,7 @@ class CallUseCase(
             repositories.getCallList()
     }
 
-    fun requestDiscover(): Flowable<CallResult> {
+    fun requestDiscover(): Flowable<BuyResult> {
         return single()
     }
 }

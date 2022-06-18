@@ -1,8 +1,8 @@
 package com.test.data.repository
 
-import com.test.domain.entities.CallResult
+import com.test.domain.entities.BuyResult
 import io.reactivex.Flowable
 
 interface TodoDataStore {
-    fun getCallList(): Flowable<CallResult>
+    fun getCallList(): Flowable<BuyResult>
 }

@@ -3,18 +3,18 @@ package com.test.todoapp.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.test.common.BaseViewModel
-import com.test.domain.entities.CallResult
+import com.test.domain.entities.BuyResult
 import com.test.domain.entities.Data
 import com.test.domain.entities.Event
 import com.test.domain.entities.Status
-import com.test.domain.usecases.CallUseCase
+import com.test.domain.usecases.BuyUseCase
 
-class HomeViewModel(private val callUseCase: CallUseCase) : BaseViewModel() {
+class HomeViewModel(private val callUseCase: BuyUseCase) : BaseViewModel() {
 
-    private val _callListLiveData = MutableLiveData<Event<Data<CallResult>>>()
-    val callListLiveData: LiveData<Event<Data<CallResult>>> = _callListLiveData
+    private val _callListLiveData = MutableLiveData<Event<Data<BuyResult>>>()
+    val callListLiveData: LiveData<Event<Data<BuyResult>>> = _callListLiveData
 
-    var callListResult: CallResult = CallResult()
+    var callListResult: BuyResult = BuyResult()
 
     fun getCallList() {
         val disposable = callUseCase.requestDiscover()
