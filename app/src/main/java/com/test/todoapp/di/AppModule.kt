@@ -13,15 +13,15 @@ private const val RETROFIT_INSTANCE = "Retrofit"
 private const val API = "Api"
 
 val mNetworkModules = module {
-    single(qualifier = named(RETROFIT_INSTANCE)) { createNetworkClient(BuildConfig.BASE_URL) }
-    single(qualifier = named(API)) { (get() as Retrofit).create(TodoApi::class.java) }
+    single { createNetworkClient(BuildConfig.BASE_URL) }
+    single { (get() as Retrofit).create(TodoApi::class.java) }
 }
 
 val mLoginRepositoryModules = module {
-    single(qualifier = named("todo_remote")) {
+    single {
         TodoRemoteImpl(
-            api = get(qualifier = named(API))
+            api = get()
         )
     }
-    single { ToDoRepositoryImpl(remote = get(qualifier = named("movie_remote"))) as TodoRepository }
+    single { ToDoRepositoryImpl(remote = get()) as TodoRepository }
 }

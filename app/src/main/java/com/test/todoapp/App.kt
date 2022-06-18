@@ -4,6 +4,7 @@ import android.app.Application
 import com.test.todoapp.di.mLoginRepositoryModules
 import com.test.todoapp.di.mNetworkModules
 import com.test.todoapp.di.mUseCaseModules
+import com.test.todoapp.home.di.homeModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -22,7 +23,8 @@ class App : Application() {
             modules(
                 mNetworkModules,
                 mLoginRepositoryModules,
-                mUseCaseModules
+                mUseCaseModules,
+                homeModule
             )
 
         }
