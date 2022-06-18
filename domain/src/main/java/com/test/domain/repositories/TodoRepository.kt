@@ -1,5 +1,8 @@
 package com.test.domain.repositories
 
-interface TodoRepository {
+import com.test.domain.entities.CallResult
+import io.reactivex.Flowable
 
+interface TodoRepository {
+    fun getCallList(): Flowable<CallResult>
 }
