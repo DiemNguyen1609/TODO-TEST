@@ -32,10 +32,10 @@ class TodoRemoteImpl constructor(private val api: TodoApi, private val dao: Todo
     }
 
     override fun getSellList(): Flowable<BuyResult> {
-        return dao.getSellList().map { tokenResponse ->
-            Log.e("TESTDATABASE", "$tokenResponse")
+        return dao.getSellList().map { dataList ->
+            Log.e("TESTDATABASE", "$dataList")
             var map: MutableList<BuyItemResult> = mutableListOf()
-            tokenResponse?.forEach { item ->
+            dataList?.forEach { item ->
                 map.add(BuyItemResult().apply {
                     this.id = item.id
                     this.price = item.price

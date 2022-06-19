@@ -8,7 +8,7 @@
         android:id="@+id/homeFragment"
         android:name="com.test.todoapp.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_callListFragment"
             app:destination="@id/callListFragment" />
@@ -21,17 +21,29 @@
     </fragment>
     <fragment
         android:id="@+id/callListFragment"
-        android:name="com.test.todoapp.CallListFragment"
+        android:name="com.test.todoapp.feature.CallListFragment"
         android:label="fragment_call_list"
-        tools:layout="@layout/fragment_call_list" />
+        tools:layout="@layout/fragment_call_list">
+        <argument
+            android:name="callList"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/buyListFragment"
-        android:name="com.test.todoapp.BuyListFragment"
+        android:name="com.test.todoapp.feature.BuyListFragment"
         android:label="fragment_buy_list"
-        tools:layout="@layout/fragment_buy_list" />
+        tools:layout="@layout/fragment_buy_list">
+        <argument
+            android:name="buyList"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/sellListFragment"
-        android:name="com.test.todoapp.SellListFragment"
+        android:name="com.test.todoapp.feature.SellListFragment"
         android:label="fragment_sell_list"
-        tools:layout="@layout/fragment_sell_list" />
+        tools:layout="@layout/fragment_sell_list">
+        <argument
+            android:name="sellList"
+            app:argType="string" />
+    </fragment>
 </navigation>

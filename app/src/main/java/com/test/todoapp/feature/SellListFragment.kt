@@ -1,10 +1,11 @@
-package com.test.todoapp
+package com.test.todoapp.feature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.test.todoapp.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -13,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [BuyListFragment.newInstance] factory method to
+ * Use the [SellListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BuyListFragment : Fragment() {
+class SellListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +35,7 @@ class BuyListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buy_list, container, false)
+        return inflater.inflate(R.layout.fragment_sell_list, container, false)
     }
 
     companion object {
@@ -44,12 +45,12 @@ class BuyListFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment BuyListFragment.
+         * @return A new instance of fragment SellListFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            BuyListFragment().apply {
+            SellListFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
