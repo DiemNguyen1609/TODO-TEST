@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.test.common.BaseFragment
 import com.test.common.BaseViewModel
+import com.test.domain.entities.BuyItemResult
 import com.test.todoapp.R
+import com.test.todoapp.common.adapter.CommonAdapter
+import com.test.todoapp.feature.adapter.BuyAdapter
 import com.test.todoapp.home.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_buy_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -23,12 +29,24 @@ class BuyListFragment : BaseFragment() {
     private val viewModel by viewModel<HomeViewModel>()
     override fun getViewModel(): BaseViewModel = viewModel
 
+    private lateinit var buyAdapter: BuyAdapter
+
     override fun initControl() {
 
     }
 
     override fun initUI() {
-
+        val listData: MutableList<BuyItemResult> = Gson().fromJson(
+            buyListFragmentArgs.buyList,
+            object : TypeToken<MutableList<BuyItemResult>>() {}.type
+        )
+            ?: mutableListOf<BuyItemResult>()
+        if (listData.isNullOrEmpty()) {
+            showAlertDialog(getString(R.string.notify_empty_data))
+        } else {
+            buyAdapter = BuyAdapter(viewModel.parseBuyDataToCommonItem(listData))
+            rcvBuyList.adapter = buyAdapter
+        }
     }
 
     override fun initEvent() {

@@ -5,5 +5,5 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val homeModule = module {
-    viewModel { HomeViewModel(callUseCase = get(), addSellUseCase = get()) }
+    viewModel { HomeViewModel(context = get(), callUseCase = get(), addSellUseCase = get(), buyUseCase = get()) }
 }

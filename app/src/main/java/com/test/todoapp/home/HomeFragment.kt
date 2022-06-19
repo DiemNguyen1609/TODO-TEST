@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.google.gson.Gson
 import com.test.common.BaseFragment
 import com.test.common.BaseViewModel
-import com.test.common.setSafeOnClickListener
+import com.test.common.extension.setSafeOnClickListener
 import com.test.domain.entities.Status
 import com.test.todoapp.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -43,17 +43,14 @@ class HomeFragment : BaseFragment() {
 
 
     override fun initControl() {
-//        tv.setOnClickListener {
-//            viewModel.addSellList(BuyItemResult().apply {
-//                id = 1
-//                name = "test1"
-//                price = BigDecimal.valueOf(12900)
-//                quantity = 2
-//                type = 2
-//            })
-//        }
 
         btnCallList.setSafeOnClickListener {
+            viewModel.getCallList()
+        }
+        btnBuyList.setSafeOnClickListener {
+            viewModel.getBuyList()
+        }
+        btnSellList.setSafeOnClickListener {
             viewModel.getCallList()
         }
     }
@@ -70,8 +67,30 @@ class HomeFragment : BaseFragment() {
                         Status.SUCCESSFUL -> {
                             discoverResult.data?.let {
                                 navigate(
+                                    HomeFragmentDirections.actionHomeFragmentToCallListFragment(
+                                        Gson().toJson(it.callResults)
+                                    )
+                                )
+                            }
+                        }
+                        Status.ERROR -> {
+
+                        }
+                        Status.LOADING -> {
+
+                        }
+                    }
+
+                }
+            })
+            buyListLiveData.observe(viewLifecycleOwner, Observer {
+                it.getContentIfNotHandled()?.let { discoverResult ->
+                    when (discoverResult.responseType) {
+                        Status.SUCCESSFUL -> {
+                            discoverResult.data?.let {
+                                navigate(
                                     HomeFragmentDirections.actionHomeFragmentToBuyListFragment(
-                                        Gson().toJson(it)
+                                        Gson().toJson(it.buyResults)
                                     )
                                 )
                             }

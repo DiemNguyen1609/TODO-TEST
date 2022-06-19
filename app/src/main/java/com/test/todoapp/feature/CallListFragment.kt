@@ -5,29 +5,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.test.common.BaseFragment
+import com.test.common.BaseViewModel
+import com.test.domain.entities.CallItemResult
 import com.test.todoapp.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.test.todoapp.common.adapter.CommonAdapter
+import com.test.todoapp.feature.adapter.CallAdapter
+import com.test.todoapp.home.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_call_list.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
  * Use the [CallListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CallListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class CallListFragment : BaseFragment() {
+
+    private val callListFragmentArgs: CallListFragmentArgs by navArgs()
+    private val viewModel by viewModel<HomeViewModel>()
+    override fun getViewModel(): BaseViewModel = viewModel
+
+    private lateinit var callAdapter: CallAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -38,23 +44,32 @@ class CallListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_call_list, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CallListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CallListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    override fun initControl() {
+
     }
+
+    override fun initUI() {
+        val listData: MutableList<CallItemResult> = Gson().fromJson(
+            callListFragmentArgs.callList,
+            object : TypeToken<MutableList<CallItemResult>>() {}.type
+        )
+            ?: mutableListOf<CallItemResult>()
+        if (listData.isNullOrEmpty()) {
+            showAlertDialog(getString(R.string.notify_empty_data))
+        } else {
+            callAdapter = CallAdapter(viewModel.parseCallDataToCommonItem(listData))
+            rcvCallList.adapter = callAdapter
+        }
+    }
+
+    override fun initEvent() {
+
+    }
+
+    override fun initConfig() {
+
+    }
+
+
 }

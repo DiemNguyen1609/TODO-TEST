@@ -40,7 +40,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation project(":domain")
-    //implementation loadingDialog
     implementation glide
     annotationProcessor glide
     implementation materialDesign
@@ -49,7 +48,6 @@ dependencies {
     implementation retrofitGsonConverter
     implementation retrofitRxJava2Adapter
     implementation retrofitLoggingInterceptors
-    //implementation koin
     implementation rxAndroid
     implementation navigationUiKtx
     implementation navigationFragmentKtx
@@ -57,5 +55,4 @@ dependencies {
     implementation "io.insert-koin:koin-android:3.2.0-beta-1"
     implementation "io.insert-koin:koin-androidx-navigation:3.2.0-beta-1"
     implementation "io.insert-koin:koin-androidx-compose:3.2.0-beta-1"
-    testImplementation "io.insert-koin:koin-test-junit4:3.2.0-beta-1"
 }

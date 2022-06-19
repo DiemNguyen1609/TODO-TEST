@@ -3,7 +3,7 @@ package com.test.domain.entities
 import java.math.BigDecimal
 
 data class BuyResult(
-    var callResults: List<BuyItemResult> = emptyList()
+    var buyResults: List<BuyItemResult> = emptyList()
 )
 
 data class BuyItemResult(

@@ -6,15 +6,16 @@ import com.test.domain.entities.BuyResult
 import com.test.domain.repositories.TodoRepository
 import io.reactivex.Flowable
 
-class BuyUseCase(
+class GetBuyUseCase(
     transformer: FlowableRxTransformer<BuyResult>,
     private val repositories: TodoRepository
 ): BaseFlowableUseCase<BuyResult>(transformer) {
+
     override fun createFlowable(data: Map<String, Any>?): Flowable<BuyResult> {
-        return repositories.getCallList()
+        return repositories.getBuyList()
     }
 
-    fun requestSellList(): Flowable<BuyResult> {
+    fun requestBuyList(): Flowable<BuyResult> {
         return single()
     }
 }

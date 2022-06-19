@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:background="@color/light_blue"
+    android:background="@color/teal_700"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
     android:paddingVertical="12dp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvBuyDetail"
+        android:id="@+id/rcvCommon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

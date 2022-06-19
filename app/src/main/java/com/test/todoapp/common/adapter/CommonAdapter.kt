@@ -1,4 +1,4 @@
-package com.test.todoapp.feature.adapter
+package com.test.todoapp.common.adapter
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,22 +6,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.test.common.extension.inflate
 import com.test.common.entities.CommonDataEntity
 import com.test.todoapp.R
-import com.test.todoapp.common.adapter.CommonDetailAdapter
-import kotlinx.android.synthetic.main.item_buy_adapter.view.*
+import kotlinx.android.synthetic.main.item_common_adapter.view.*
 
-class BuyAdapter(private val buyList: MutableList<CommonDataEntity>) :
-    RecyclerView.Adapter<BuyAdapter.BuyViewHolder>() {
+class CommonAdapter(private val commonList: MutableList<CommonDataEntity>) :
+    RecyclerView.Adapter<CommonAdapter.BuyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuyViewHolder {
-        return BuyViewHolder(parent.context.inflate(R.layout.item_buy_adapter, parent))
+        return BuyViewHolder(parent.context.inflate(R.layout.item_common_adapter, parent))
     }
 
     override fun onBindViewHolder(holder: BuyViewHolder, position: Int) {
-        holder.bindData(buyList[position], position, buyList.size - 1)
+        holder.bindData(commonList[position], position, commonList.size - 1)
     }
 
     override fun getItemCount(): Int {
-        return buyList.size
+        return commonList.size
     }
 
     inner class BuyViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +32,7 @@ class BuyAdapter(private val buyList: MutableList<CommonDataEntity>) :
         ) {
             view.apply {
                 val commonAdapter = CommonDetailAdapter(item.dataDetailList.toMutableList())
-                rcvBuyDetail.adapter = commonAdapter
+                rcvCommon.adapter = commonAdapter
             }
         }
     }

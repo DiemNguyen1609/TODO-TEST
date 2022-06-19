@@ -1,1 +1,4 @@
-<resources></resources>
+<resources>
+    <string name="notification">Notification</string>
+    <string name="close">Close</string>
+</resources>

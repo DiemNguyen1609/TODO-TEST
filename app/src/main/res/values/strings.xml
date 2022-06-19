@@ -5,4 +5,8 @@
     <string name="buy_list_name_item">Name: %s</string>
     <string name="buy_list_price_item">Price: %s</string>
     <string name="buy_list_quantity_item">Quantity: %s</string>
+    <string name="notify_empty_data">Data is empty. Please try again.</string>
+    <string name="call_list">Call List</string>
+    <string name="buy_list">Buy List</string>
+    <string name="sell_list">Sell List</string>
 </resources>

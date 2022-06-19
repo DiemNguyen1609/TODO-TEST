@@ -11,7 +11,7 @@ class BuyMapper {
     fun mapToModel(callEntity: BuyEntity): BuyResult {
         return BuyResult().apply {
             callEntity.let {
-                callResults = it?.callList?.map {
+                this.buyResults = it?.buyList?.map {
                     mapToCallResult(it)
                 } ?: emptyList()
             }
@@ -20,7 +20,7 @@ class BuyMapper {
 
     private fun mapToCallResult(callItemEntity: BuyItemEntity): BuyItemResult {
         return BuyItemResult().apply {
-            callItemEntity?.let {
+            callItemEntity.let {
                 id = it.id ?: 0
                 name = it.name ?: ""
                 type = it.type ?: 0

@@ -72,18 +72,46 @@ abstract class BaseFragment : Fragment() {
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
 
-//        positiveButton.setTextColor(
-//            ContextCompat.getColor(
-//                requireContext(),
-//                R.color.button_in_alert_dialog_color
-//            )
-//        )
-//        negativeButton.setTextColor(
-//            ContextCompat.getColor(
-//                requireContext(),
-//                R.color.button_in_alert_dialog_color
-//            )
-//        )
+        positiveButton.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.blue
+            )
+        )
+        negativeButton.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.red
+            )
+        )
+    }
+
+    open fun showAlertDialog(
+        content: String
+    ) {
+        val builder: AlertDialog.Builder =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                AlertDialog.Builder(requireContext())
+            } else {
+                AlertDialog.Builder(requireContext())
+            }
+
+        val dialog = builder
+            .setTitle(getString(R.string.notification))
+            .setMessage(content)
+            .setPositiveButton(getString(R.string.close)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+
+        val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+
+        positiveButton.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.blue
+            )
+        )
     }
 
     abstract fun getViewModel(): BaseViewModel
