@@ -10,11 +10,13 @@ import com.google.gson.Gson
 import com.test.common.BaseFragment
 import com.test.common.BaseViewModel
 import com.test.common.extension.setSafeOnClickListener
+import com.test.domain.entities.BuyItemResult
 import com.test.domain.entities.Status
 import com.test.todoapp.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.math.BigDecimal
 
 /**
  * A simple [Fragment] subclass.
@@ -111,7 +113,29 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initConfig() {
-
+        viewModel.apply {
+            addSellList(BuyItemResult().apply {
+                this.id = 1
+                this.price = BigDecimal.valueOf(1235456)
+                this.name = "Test 1"
+                this.type = 2
+                this.quantity = 4
+            })
+            addSellList(BuyItemResult().apply {
+                this.id = 2
+                this.price = BigDecimal.valueOf(543453)
+                this.name = "Test 2"
+                this.type = 2
+                this.quantity = 45
+            })
+            addSellList(BuyItemResult().apply {
+                this.id = 3
+                this.price = BigDecimal.valueOf(3356546)
+                this.name = "Test 3"
+                this.type = 2
+                this.quantity = 67
+            })
+        }
     }
 
 }
