@@ -3,6 +3,7 @@ package com.test.todoapp.di
 import com.test.domain.usecases.AddSellUseCase
 import com.test.domain.usecases.GetBuyUseCase
 import com.test.domain.usecases.GetCallUseCase
+import com.test.domain.usecases.GetSellUseCase
 import com.test.todoapp.common.AsyncFlowableTransformer
 import org.koin.dsl.module
 
@@ -15,6 +16,11 @@ val mUseCaseModules = module {
     }
     factory {
         AddSellUseCase(
+            repositories = get()
+        )
+    }
+    factory {
+        GetSellUseCase(
             repositories = get()
         )
     }

@@ -10,11 +10,14 @@ import com.test.domain.entities.*
 import com.test.domain.usecases.AddSellUseCase
 import com.test.domain.usecases.GetBuyUseCase
 import com.test.domain.usecases.GetCallUseCase
+import com.test.domain.usecases.GetSellUseCase
 import com.test.todoapp.R
+import java.math.BigDecimal
 
 class HomeViewModel(
     private val context: Context,
     private val callUseCase: GetCallUseCase,
+    private val getSellUseCase: GetSellUseCase,
     private val buyUseCase: GetBuyUseCase,
     private val addSellUseCase: AddSellUseCase
 ) : BaseViewModel() {
@@ -27,6 +30,9 @@ class HomeViewModel(
 
     private val _addSellLiveData = MutableLiveData<Event<Data<BuyResult>>>()
     val addSellLiveData: LiveData<Event<Data<BuyResult>>> = _addSellLiveData
+
+    private val _getSellLiveData = MutableLiveData<Event<Data<BuyResult>>>()
+    val getSellLiveData: LiveData<Event<Data<BuyResult>>> = _getSellLiveData
 
 
     fun getCallList() {
@@ -81,6 +87,32 @@ class HomeViewModel(
 
     fun addSellList(data: BuyItemResult) {
         addSellUseCase.addSellList(data)
+    }
+
+    fun getSellList() {
+        val disposable = getSellUseCase.getSellList()
+            .doOnSubscribe {
+                val result: Data<BuyResult> = Data(Status.LOADING, null)
+                _getSellLiveData.postValue(Event(result))
+            }
+            .doOnComplete {
+
+            }
+            .subscribe({ response ->
+                val data = Data(responseType = Status.SUCCESSFUL, data = response)
+                _getSellLiveData.postValue(Event(data))
+
+            }, { error ->
+
+                _getSellLiveData.postValue(
+                    Event(Data(responseType = Status.ERROR, error = Error(error.message)))
+                )
+                handleNetworkError(error)
+            }, {
+
+            })
+
+        addDisposable(disposable)
     }
 
     fun parseBuyDataToCommonItem(data: MutableList<BuyItemResult>): MutableList<CommonDataEntity> {
@@ -138,5 +170,30 @@ class HomeViewModel(
         return dataResult
     }
 
+    fun addDataToDataBase() {
+
+        addSellList(BuyItemResult().apply {
+            this.id = 1
+            this.price = BigDecimal.valueOf(1235456)
+            this.name = "Test 1"
+            this.type = 2
+            this.quantity = 4
+        })
+        addSellList(BuyItemResult().apply {
+            this.id = 2
+            this.price = BigDecimal.valueOf(543453)
+            this.name = "Test 2"
+            this.type = 2
+            this.quantity = 45
+        })
+        addSellList(BuyItemResult().apply {
+            this.id = 3
+            this.price = BigDecimal.valueOf(3356546)
+            this.name = "Test 3"
+            this.type = 2
+            this.quantity = 67
+        })
+
+    }
 
 }

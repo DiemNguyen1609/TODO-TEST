@@ -10,10 +10,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.test.common.BaseFragment
 import com.test.common.BaseViewModel
-import com.test.common.extension.setSafeOnClickListener
 import com.test.domain.entities.BuyItemResult
 import com.test.todoapp.R
-import com.test.todoapp.common.adapter.CommonAdapter
 import com.test.todoapp.feature.adapter.BuyAdapter
 import com.test.todoapp.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_buy_list.*
@@ -33,14 +31,14 @@ class BuyListFragment : BaseFragment() {
     private lateinit var buyAdapter: BuyAdapter
 
     override fun initControl() {
-        tabMode.setOnBackButtonClickListener {
+        toolBar.setOnBackButtonClickListener {
             backToPrevious()
         }
     }
 
     override fun initUI() {
 
-        tabMode.setToolBarTitle(getString(R.string.buy_list))
+        toolBar.setToolBarTitle(getString(R.string.buy_list))
 
         val listData: MutableList<BuyItemResult> = Gson().fromJson(
             buyListFragmentArgs.buyList,

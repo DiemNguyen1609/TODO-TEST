@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        viewModel.addDataToDataBase()
     }
 
 
@@ -53,7 +53,7 @@ class HomeFragment : BaseFragment() {
             viewModel.getBuyList()
         }
         btnSellList.setSafeOnClickListener {
-            viewModel.getCallList()
+            viewModel.getSellList()
         }
     }
 
@@ -109,33 +109,36 @@ class HomeFragment : BaseFragment() {
 
                 }
             })
+
+            getSellLiveData.observe(viewLifecycleOwner, Observer {
+                it.getContentIfNotHandled()?.let { discoverResult ->
+                    when (discoverResult.responseType) {
+                        Status.SUCCESSFUL -> {
+                            hideLoadingDialog()
+                            discoverResult.data?.let {
+                                navigate(
+                                    HomeFragmentDirections.actionHomeFragmentToSellListFragment(
+                                        Gson().toJson(it.buyResults)
+                                    )
+                                )
+                            }
+                        }
+                        Status.ERROR -> {
+                            hideLoadingDialog()
+                        }
+                        Status.LOADING -> {
+                            showLoadingDialog()
+                        }
+                    }
+
+                }
+            })
         }
     }
 
     override fun initConfig() {
-        viewModel.apply {
-            addSellList(BuyItemResult().apply {
-                this.id = 1
-                this.price = BigDecimal.valueOf(1235456)
-                this.name = "Test 1"
-                this.type = 2
-                this.quantity = 4
-            })
-            addSellList(BuyItemResult().apply {
-                this.id = 2
-                this.price = BigDecimal.valueOf(543453)
-                this.name = "Test 2"
-                this.type = 2
-                this.quantity = 45
-            })
-            addSellList(BuyItemResult().apply {
-                this.id = 3
-                this.price = BigDecimal.valueOf(3356546)
-                this.name = "Test 3"
-                this.type = 2
-                this.quantity = 67
-            })
-        }
+
     }
+
 
 }

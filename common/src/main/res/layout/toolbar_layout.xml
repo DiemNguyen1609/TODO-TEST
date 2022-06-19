@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="@color/light_red">
+    android:background="@color/purple_700">
 
     <TextView
         android:id="@+id/tvBack"
@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:padding="7dp"
         android:text="@string/back"
-        android:textColor="@color/black"
+        android:textColor="@color/light_blue"
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

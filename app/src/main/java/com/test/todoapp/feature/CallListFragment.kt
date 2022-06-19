@@ -17,7 +17,7 @@ import com.test.todoapp.feature.adapter.CallAdapter
 import com.test.todoapp.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_buy_list.*
 import kotlinx.android.synthetic.main.fragment_call_list.*
-import kotlinx.android.synthetic.main.fragment_call_list.tabMode
+import kotlinx.android.synthetic.main.fragment_call_list.toolBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -48,14 +48,14 @@ class CallListFragment : BaseFragment() {
 
 
     override fun initControl() {
-        tabMode.setOnBackButtonClickListener {
+        toolBar.setOnBackButtonClickListener {
             backToPrevious()
         }
     }
 
     override fun initUI() {
 
-        tabMode.setToolBarTitle(getString(R.string.call_list))
+        toolBar.setToolBarTitle(getString(R.string.call_list))
 
         val listData: MutableList<CallItemResult> = Gson().fromJson(
             callListFragmentArgs.callList,
