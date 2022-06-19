@@ -65,6 +65,7 @@ class HomeFragment : BaseFragment() {
                 it.getContentIfNotHandled()?.let { discoverResult ->
                     when (discoverResult.responseType) {
                         Status.SUCCESSFUL -> {
+                            hideLoadingDialog()
                             discoverResult.data?.let {
                                 navigate(
                                     HomeFragmentDirections.actionHomeFragmentToCallListFragment(
@@ -74,10 +75,10 @@ class HomeFragment : BaseFragment() {
                             }
                         }
                         Status.ERROR -> {
-
+                            hideLoadingDialog()
                         }
                         Status.LOADING -> {
-
+                            showLoadingDialog()
                         }
                     }
 
@@ -87,6 +88,7 @@ class HomeFragment : BaseFragment() {
                 it.getContentIfNotHandled()?.let { discoverResult ->
                     when (discoverResult.responseType) {
                         Status.SUCCESSFUL -> {
+                            hideLoadingDialog()
                             discoverResult.data?.let {
                                 navigate(
                                     HomeFragmentDirections.actionHomeFragmentToBuyListFragment(
@@ -96,10 +98,10 @@ class HomeFragment : BaseFragment() {
                             }
                         }
                         Status.ERROR -> {
-
+                            hideLoadingDialog()
                         }
                         Status.LOADING -> {
-
+                            showLoadingDialog()
                         }
                     }
 

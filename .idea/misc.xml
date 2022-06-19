@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/item_call_adapter.xml" value="0.1889564336372847" />
         <entry key="app/src/main/res/layout/item_common_adapter.xml" value="0.1889564336372847" />
         <entry key="common/src/main/res/layout/activity_main.xml" value="0.18704710144927536" />
+        <entry key="common/src/main/res/layout/loading_dialog.xml" value="0.1889564336372847" />
       </map>
     </option>
   </component>

@@ -32,7 +32,8 @@ class HomeViewModel(
     fun getCallList() {
         val disposable = callUseCase.requestCallList()
             .doOnSubscribe {
-
+                val result: Data<CallResult> = Data(Status.LOADING, null)
+                _callListLiveData.value = Event(result)
             }
             .doOnComplete {
 
@@ -56,7 +57,8 @@ class HomeViewModel(
     fun getBuyList() {
         val disposable = buyUseCase.requestBuyList()
             .doOnSubscribe {
-
+                val result: Data<BuyResult> = Data(Status.LOADING, null)
+                _buyListLiveData.value = Event(result)
             }
             .doOnComplete {
 

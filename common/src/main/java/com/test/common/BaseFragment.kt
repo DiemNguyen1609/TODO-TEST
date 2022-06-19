@@ -12,8 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.test.common.view.LoadingDialog
 
 abstract class BaseFragment : Fragment() {
+
+    private var loadingDialog: LoadingDialog? = null
 
     val fManager: FragmentManager by lazy {
         requireActivity().supportFragmentManager
@@ -25,6 +28,8 @@ abstract class BaseFragment : Fragment() {
         initUI()
         initEvent()
         initConfig()
+
+
 
         with(getViewModel()) {
 
@@ -138,6 +143,19 @@ abstract class BaseFragment : Fragment() {
 
     fun backToPrevious() {
         this.findNavController().popBackStack()
+    }
+
+    fun showLoadingDialog() {
+        if (loadingDialog == null) {
+            loadingDialog = LoadingDialog(context)
+            loadingDialog?.showLoadingDialog()
+        } else {
+            loadingDialog?.showLoadingDialog()
+        }
+    }
+
+    fun hideLoadingDialog() {
+        loadingDialog?.hideLoadingDialog()
     }
 
 }
