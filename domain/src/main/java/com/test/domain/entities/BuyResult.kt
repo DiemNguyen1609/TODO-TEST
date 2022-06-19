@@ -7,9 +7,9 @@ data class BuyResult(
 )
 
 data class BuyItemResult(
-    var id: Float = 0f,
-    var type: Float = 0f,
-    var quantity: Float = 0f,
+    var id: Int =0,
+    var type: Int = 0,
+    var quantity: Int = 0,
     var name: String = "",
     var price: BigDecimal = BigDecimal.ZERO
 )

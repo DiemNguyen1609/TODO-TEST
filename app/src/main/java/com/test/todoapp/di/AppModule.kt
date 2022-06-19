@@ -1,11 +1,10 @@
 package com.test.todoapp.di
 
 import com.test.data.api.TodoApi
-import com.test.data.repository.ToDoRepositoryImpl
 import com.test.data.repository.TodoRemoteImpl
+import com.test.data.repository.TodoRepositoryImpl
 import com.test.domain.repositories.TodoRepository
 import com.test.todoapp.BuildConfig
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -20,8 +19,9 @@ val mNetworkModules = module {
 val mLoginRepositoryModules = module {
     single {
         TodoRemoteImpl(
-            api = get()
+            api = get(),
+            dao = get()
         )
     }
-    single { ToDoRepositoryImpl(remote = get()) as TodoRepository }
+    single { TodoRepositoryImpl(remote = get()) as TodoRepository }
 }

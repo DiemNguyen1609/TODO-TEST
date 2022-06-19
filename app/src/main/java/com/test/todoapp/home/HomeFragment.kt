@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.test.common.BaseFragment
 import com.test.common.BaseViewModel
+import com.test.domain.entities.BuyItemResult
 import com.test.domain.entities.Status
 import com.test.todoapp.R
+import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.math.BigDecimal
 
 /**
  * A simple [Fragment] subclass.
@@ -40,7 +43,15 @@ class HomeFragment : BaseFragment() {
 
 
     override fun initControl() {
-
+        tv.setOnClickListener {
+            viewModel.addSellList(BuyItemResult().apply {
+                id = 1
+                name = "test1"
+                price = BigDecimal.valueOf(12900)
+                quantity = 2
+                type = 2
+            })
+        }
     }
 
     override fun initUI() {

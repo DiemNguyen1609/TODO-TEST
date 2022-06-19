@@ -21,9 +21,9 @@ data class BuyEntity(
 
 data class BuyItemEntity(
     var name: String? = null,
-    var id: Float? = null,
-    var type: Float? = null,
-    var quantity: Float? = null,
+    var id: Int? = null,
+    var type: Int? = null,
+    var quantity: Int? = null,
     var price: BigDecimal? = null
 ) {
     companion object {
@@ -31,9 +31,9 @@ data class BuyItemEntity(
             val model = BuyItemEntity()
 
                 model.name = map?.name ?: ""
-                model.id = map?.id ?: 0f
-                model.type = map?.type ?: 0f
-                model.quantity = map?.quantity ?: 0f
+                model.id = map?.id ?: 0
+                model.type = map?.type ?: 0
+                model.quantity = map?.quantity ?: 0
                 model.price = map?.price ?: BigDecimal.ZERO
 
             return model

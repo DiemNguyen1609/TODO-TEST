@@ -1,6 +1,7 @@
 package com.test.todoapp
 
 import android.app.Application
+import com.test.todoapp.di.mDatabaseModules
 import com.test.todoapp.di.mLoginRepositoryModules
 import com.test.todoapp.di.mNetworkModules
 import com.test.todoapp.di.mUseCaseModules
@@ -24,6 +25,7 @@ class App : Application() {
                 mNetworkModules,
                 mLoginRepositoryModules,
                 mUseCaseModules,
+                mDatabaseModules,
                 homeModule
             )
 

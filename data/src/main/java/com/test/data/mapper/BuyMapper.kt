@@ -20,12 +20,12 @@ class BuyMapper {
 
     private fun mapToCallResult(callItemEntity: BuyItemEntity): BuyItemResult {
         return BuyItemResult().apply {
-            callItemEntity.let {
-                id = it?.id ?: 0f
-                name = it?.name ?: ""
-                type = it?.type ?: 0f
-                quantity = it?.quantity ?: 0f
-                price = it?.price ?: BigDecimal.ZERO
+            callItemEntity?.let {
+                id = it.id ?: 0
+                name = it.name ?: ""
+                type = it.type ?: 0
+                quantity = it.quantity ?: 0
+                price = it.price ?: BigDecimal.ZERO
             }
         }
     }

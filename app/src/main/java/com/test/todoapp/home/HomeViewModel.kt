@@ -3,21 +3,25 @@ package com.test.todoapp.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.test.common.BaseViewModel
-import com.test.domain.entities.BuyResult
-import com.test.domain.entities.Data
-import com.test.domain.entities.Event
-import com.test.domain.entities.Status
+import com.test.domain.entities.*
+import com.test.domain.usecases.AddSellUseCase
 import com.test.domain.usecases.BuyUseCase
 
-class HomeViewModel(private val callUseCase: BuyUseCase) : BaseViewModel() {
+class HomeViewModel(
+    private val callUseCase: BuyUseCase,
+    private val addSellUseCase: AddSellUseCase
+) : BaseViewModel() {
 
     private val _callListLiveData = MutableLiveData<Event<Data<BuyResult>>>()
     val callListLiveData: LiveData<Event<Data<BuyResult>>> = _callListLiveData
 
+    private val _addSellLiveData = MutableLiveData<Event<Data<BuyResult>>>()
+    val addSellLiveData: LiveData<Event<Data<BuyResult>>> = _addSellLiveData
+
     var callListResult: BuyResult = BuyResult()
 
     fun getCallList() {
-        val disposable = callUseCase.requestDiscover()
+        val disposable = callUseCase.requestSellList()
             .doOnSubscribe {
 
             }
@@ -42,4 +46,8 @@ class HomeViewModel(private val callUseCase: BuyUseCase) : BaseViewModel() {
         addDisposable(disposable)
     }
 
+    fun addSellList(data: BuyItemResult) {
+        addSellUseCase.addSellList(data)
+        // handleNetworkError(error)
+    }
 }

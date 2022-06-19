@@ -11,15 +11,10 @@ class BuyUseCase(
     private val repositories: TodoRepository
 ): BaseFlowableUseCase<BuyResult>(transformer) {
     override fun createFlowable(data: Map<String, Any>?): Flowable<BuyResult> {
-        val map = mutableMapOf<String, String>()
-        return if (data !== null) {
-            data.forEach { map[it.key] = it.value.toString() }
-            repositories.getCallList()
-        } else
-            repositories.getCallList()
+        return repositories.getCallList()
     }
 
-    fun requestDiscover(): Flowable<BuyResult> {
+    fun requestSellList(): Flowable<BuyResult> {
         return single()
     }
 }
